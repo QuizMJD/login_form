@@ -46,7 +46,6 @@
             <artifactId>ojdbc10</artifactId>
             <version>19.13.0.0.1</version>
         </dependency>
-
     </dependencies>
 
     <build>

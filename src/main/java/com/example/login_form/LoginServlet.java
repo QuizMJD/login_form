@@ -40,6 +40,7 @@ public class LoginServlet extends HttpServlet {
 
         try {
             // Tạo kết nối đến cơ sở dữ liệu
+            Class.forName("com.mysql.cj.jdbc.Driver");
             conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/user_db", "root", "123456");
 
             // Tạo truy vấn kiểm tra thông tin đăng nhập
@@ -55,8 +56,8 @@ public class LoginServlet extends HttpServlet {
                 int count = rs.getInt(1);
                 return count > 0;
             }
-        } catch (SQLException e) {
-//            e.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
         } finally {
             // Đóng các kết nối và tài nguyên
             try {
@@ -64,7 +65,7 @@ public class LoginServlet extends HttpServlet {
                 if (stmt != null) stmt.close();
                 if (conn != null) conn.close();
             } catch (SQLException e) {
-//                e.printStackTrace();
+                e.printStackTrace();
             }
         }
 
