@@ -31,20 +31,30 @@ public class JdbcConnection {
     }
 
     // Method to update the name of a brand based on its ID
-    private static int updateBrandName(Connection conn, int id, String newName) throws SQLException {
-        String updateQuery = "UPDATE users SET name = ? WHERE id = ?";
-        PreparedStatement updateStatement = conn.prepareStatement(updateQuery);
-        updateStatement.setString(1, newName);
-        updateStatement.setInt(2, id);
-        return updateStatement.executeUpdate();
+    public boolean updateUser(Connection conn, int userId, String newUsername, String newPassword) {
+        String updateQuery = "UPDATE users SET username = ?, password = ? WHERE id = ?";
+        try (PreparedStatement updateStatement = conn.prepareStatement(updateQuery)) {
+            updateStatement.setString(1, newUsername);
+            updateStatement.setString(2, newPassword);
+            updateStatement.setInt(3, userId);
+            int rowsUpdated = updateStatement.executeUpdate();
+            return rowsUpdated > 0;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
     }
 
-    // Method to delete a brand based on its ID
-    private static int deleteBrandById(Connection conn, int id) throws SQLException {
+    public boolean deleteUser(Connection conn, int userId) {
         String deleteQuery = "DELETE FROM users WHERE id = ?";
-        PreparedStatement deleteStatement = conn.prepareStatement(deleteQuery);
-        deleteStatement.setInt(1, id);
-        return deleteStatement.executeUpdate();
+        try (PreparedStatement deleteStatement = conn.prepareStatement(deleteQuery)) {
+            deleteStatement.setInt(1, userId);
+            int rowsDeleted = deleteStatement.executeUpdate();
+            return rowsDeleted > 0;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
     }
 
     // Method to search for a brand by its name
