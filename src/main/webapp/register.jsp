@@ -101,19 +101,20 @@
 </head>
 <body>
 <div class="container">
-    <form class="registration-form">
+    <%--<form action="register" method="post">--%>
+    <form class="registration-form" action="register" method="post">>
         <h2>Registration</h2>
         <div class="form-group">
             <label for="username">Username</label>
-            <input type="text" id="username" name="username" placeholder="Enter your username" required>
+            <input type="text" id="username" name="username" placeholder="Enter your username" >
         </div>
         <div class="form-group">
             <label for="password">Password</label>
-            <input type="password" id="password" name="password" placeholder="Enter your password" required>
+            <input type="password" id="password" name="password" placeholder="Enter your password">
         </div>
         <div class="form-group">
-            <label for="confirm-password">Confirm Password</label>
-            <input type="password" id="confirm-password" name="confirm-password" placeholder="Confirm your password" required>
+            <label for="confirm_password">Confirm Password</label>
+            <input type="password" id="confirm_password" name="confirm_password" placeholder="Confirm your password" >
         </div>
         <button type="submit">Register</button>
 <c:if test="${not empty errorMessage}">

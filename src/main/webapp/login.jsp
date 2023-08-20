@@ -97,11 +97,11 @@
         <h2>Login</h2>
         <div class="form-group">
             <label for="username">Username</label>
-            <input type="text" id="username" name="username" placeholder="Enter your username" required>
+            <input type="text" id="username" name="username" placeholder="Enter your username" >
         </div>
         <div class="form-group">
             <label for="password">Password</label>
-            <input type="password" id="password" name="password" placeholder="Enter your password" required>
+            <input type="password" id="password" name="password" placeholder="Enter your password" >
         </div>
         <button type="submit">Login</button>
         <p><a href="register.jsp">đăng ký</a></p>>
