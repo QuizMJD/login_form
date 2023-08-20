@@ -21,11 +21,13 @@ public class JdbcConnection {
     }
 
     // Method to insert a new brand into the database
-    private static int insertBrand(Connection conn, String name) throws SQLException {
-        String insertQuery = "INSERT INTO users (name) VALUES (?)";
+    public static boolean insertUser(Connection conn, String username, String password) throws SQLException {
+        String insertQuery = "INSERT INTO users (username, password) VALUES (?, ?)";
         PreparedStatement insertStatement = conn.prepareStatement(insertQuery);
-        insertStatement.setString(1, name);
-        return insertStatement.executeUpdate();
+        insertStatement.setString(1, username);
+        insertStatement.setString(2, password);
+        int rowsInserted = insertStatement.executeUpdate();
+        return rowsInserted > 0; // Trả về true nếu có ít nhất một bản ghi được chèn
     }
 
     // Method to update the name of a brand based on its ID

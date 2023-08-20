@@ -13,6 +13,7 @@
     <input type="password" id="password" name="password"><br>
 
     <input type="submit" value="Login">
+    <p><a href="register.jsp">đăng ký</a></p>
 </form>
 
 <%-- Hiển thị thông báo lỗi nếu có --%>
