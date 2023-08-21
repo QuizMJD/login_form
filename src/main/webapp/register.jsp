@@ -118,9 +118,9 @@
             <input type="password" id="confirm_password" name="confirm_password" placeholder="Confirm your password" >
         </div>
         <button type="submit">Register</button>
-<c:if test="${not empty errorMessage}">
-        <p>${errorMessage}</p>
-    </c:if>
+        <c:if test="${not empty errorMessage}">
+            <p>${errorMessage}</p>
+        </c:if>
 
     </form>
 </div>

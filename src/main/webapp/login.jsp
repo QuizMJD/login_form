@@ -105,7 +105,7 @@
             <input type="password" id="password" name="password" placeholder="Enter your password" >
         </div>
         <button type="submit">Login</button>
-        <p><a href="register.jsp">đăng ký</a></p>>
+        <p><a href="register.jsp">đăng ký</a></p>
         <%-- Hiển thị thông báo lỗi nếu có --%>
         <c:if test="${not empty errorMessage}">
             <p>${errorMessage}</p>

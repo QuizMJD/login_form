@@ -15,7 +15,7 @@
 <h1>Account Information List</h1>
 
 <!-- Form for search -->
-<form action="search-info-list" method="get">
+<form action="/search-info-list" method="get">
   <label for="searchUsername">Search by Username:</label>
   <input type="text" id="searchUsername" name="searchUsername" placeholder="Enter username">
   <button type="submit">Search</button>

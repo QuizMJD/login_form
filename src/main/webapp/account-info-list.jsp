@@ -13,7 +13,6 @@
 </head>
 <body>
 <h1>Account Information List</h1>
-<a class="link" href="account-info-list.jsp">Quản lý tài khoản</a>
 <table class="account-info-list">
     <%
         List<User> currentUsers = (List<User>) request.getAttribute("users");

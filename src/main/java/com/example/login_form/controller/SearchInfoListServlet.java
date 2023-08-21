@@ -19,28 +19,6 @@ import java.util.List;
 @WebServlet("/account-info-list")
 public class SearchInfoListServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        List<User> users = new ArrayList<>();
 
-        try {
-            Connection conn = JdbcConnection.createConnection();
-            Statement statement = conn.createStatement();
-            String query = "SELECT username, password FROM users";
-            ResultSet resultSet = statement.executeQuery(query);
-
-            while (resultSet.next()) {
-                String username = resultSet.getString("username");
-                String password = resultSet.getString("password");
-                User user = new User(username, password);
-                users.add(user);
-            }
-
-            conn.close();
-        } catch (SQLException | ClassNotFoundException e) {
-            e.printStackTrace();
-            // Handle exceptions
-        }
-
-        request.setAttribute("users", users);
-        request.getRequestDispatcher("search-info-list.jsp").forward(request, response);
     }
 }

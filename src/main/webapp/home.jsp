@@ -44,7 +44,7 @@
 <div class="container">
     <h1>Trang đăng nhập</h1>
     <!-- Biểu mẫu đăng nhập ở đây -->
-    <a class="link" href="account-info-list">Quản lý tài khoản</a>
+    <a class="link" href="users">Quản lý tài khoản</a>
 
     <a class="link" href="login.jsp">Quay lại trang chủ</a>
 </div>
