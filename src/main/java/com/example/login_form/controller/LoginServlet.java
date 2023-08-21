@@ -36,11 +36,6 @@ public class LoginServlet extends HttpServlet {
             request.setAttribute("errorMessage", "Invalid username or password");
             request.getRequestDispatcher("login.jsp").forward(request, response);
         }
-
-
-
-
-
     }
 
     private boolean validateUser (String username, String password) throws SQLException {
@@ -49,11 +44,7 @@ public class LoginServlet extends HttpServlet {
         // Ví dụ sử dụng JDBC để truy vấn cơ sở dữ liệu
         // Đây chỉ là ví dụ, bạn cần thay thế bằng mã xử lý thực tế
 
-        JdbcConnection jdbcConnection = new JdbcConnection();
-        return jdbcConnection.login(username, password);
+        return JdbcConnection.login(username, password);
     }
-
-
-
 }
 

@@ -1,6 +1,7 @@
 package com.example.login_form.controller;
 
 import com.example.login_form.db.JdbcConnection;
+import com.example.login_form.model.User;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -16,10 +17,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 @WebServlet("/account-info-list")
-public class AccountInfoListServlet extends HttpServlet {
+public class SearchInfoListServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        List<String> usernames = new ArrayList<>();
-        List<String> passwords = new ArrayList<>();
+        List<User> users = new ArrayList<>();
 
         try {
             Connection conn = JdbcConnection.createConnection();
@@ -30,8 +30,8 @@ public class AccountInfoListServlet extends HttpServlet {
             while (resultSet.next()) {
                 String username = resultSet.getString("username");
                 String password = resultSet.getString("password");
-                usernames.add(username);
-                passwords.add(password); // Note: Displaying passwords directly is not recommended
+                User user = new User(username, password);
+                users.add(user);
             }
 
             conn.close();
@@ -40,9 +40,7 @@ public class AccountInfoListServlet extends HttpServlet {
             // Handle exceptions
         }
 
-        request.setAttribute("usernames", usernames);
-        request.setAttribute("passwords", passwords);
-
-        request.getRequestDispatcher("/account-info-list.jsp").forward(request, response);
+        request.setAttribute("users", users);
+        request.getRequestDispatcher("search-info-list.jsp").forward(request, response);
     }
 }

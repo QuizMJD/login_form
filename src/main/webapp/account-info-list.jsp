@@ -1,13 +1,8 @@
-<%@ page import="java.util.List" %><%--
-  Created by IntelliJ IDEA.
-  User: PC
-  Date: 21/08/2023
-  Time: 12:19 CH
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" pageEncoding="UTF-8" %>
-<%@ taglib uri = "http://java.sun.com/jsp/jstl/core" prefix = "c" %>
-
+<%@ page import="com.example.login_form.model.User" %>
+<%@ page import="java.util.List" %>
+<%@ page import="java.util.ArrayList" %>
+<!-- Replace "your.package" with the actual package name of the User class -->
 
 <!DOCTYPE html>
 <html lang="en">
@@ -18,19 +13,27 @@
 </head>
 <body>
 <h1>Account Information List</h1>
-<table class="account-info-list" action="account-info-list" method="get">
+<a class="link" href="account-info-list.jsp">Quản lý tài khoản</a>
+<table class="account-info-list">
+    <%
+        List<User> currentUsers = (List<User>) request.getAttribute("users");
+        if (currentUsers != null && !currentUsers.isEmpty()) {
+            for (User currentUser : currentUsers) {
+    %>
     <tr>
-        <th>Username</th>
-        <th>Password</th>
+        <td><%= currentUser.getUsername() %></td>
+        <td><%= currentUser.getPassword() %></td>
     </tr>
-    <% List<String> usernames = (List<String>) request.getAttribute("usernames"); %>
-    <c:forEach items="${usernames}" var="username" varStatus="loop">
-        <tr>
-            <td>${username}</td>
-            <td>${passwords[loop.index]}</td> <!-- Displaying passwords directly is not recommended -->
-        </tr>
-    </c:forEach>
+    <%
+        }
+    } else {
+    %>
+    <tr>
+        <td colspan="2">No users found.</td>
+    </tr>
+    <%
+        }
+    %>
 </table>
 </body>
 </html>
-
