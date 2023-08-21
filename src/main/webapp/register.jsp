@@ -6,6 +6,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib uri = "http://java.sun.com/jsp/jstl/core" prefix = "c" %>
 <%--<html>--%>
 <%--<head>--%>
 <%--    <title>register</title>--%>
@@ -102,7 +103,7 @@
 <body>
 <div class="container">
     <%--<form action="register" method="post">--%>
-    <form class="registration-form" action="register" method="post">>
+    <form class="registration-form" action="register" method="post">
         <h2>Registration</h2>
         <div class="form-group">
             <label for="username">Username</label>

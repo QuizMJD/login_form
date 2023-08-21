@@ -1,4 +1,4 @@
-package com.example.login_form;
+package com.example.login_form.controller;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;

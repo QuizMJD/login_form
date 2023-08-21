@@ -49,7 +49,7 @@
 //}
 //
 //
-package com.example.login_form;
+package com.example.login_form.controller;
 
 import com.example.login_form.db.JdbcConnection;
 
@@ -60,12 +60,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
 @WebServlet("/register")
-public class Register extends HttpServlet {
+public class RegisterServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String username = request.getParameter("username");
