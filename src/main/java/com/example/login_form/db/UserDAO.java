@@ -2,7 +2,19 @@ package com.example.login_form.db;
 
 import java.sql.*;
 
-public class JdbcConnection {
+public class UserDAO {
+    private static final String SELECT_USER_BY_ID = "select id,name,email,country from users where id =?";
+    private static final String INSERT_QUERY = "INSERT INTO users (username, password) VALUES (?, ?)";
+    private static final String UPDATE_QUERY = "UPDATE users SET username = ?, password = ? WHERE id = ?";
+    private static final String DELETE_QUERY = "DELETE FROM users WHERE id = ?";
+    private static final String SEARCH_QUERY = "SELECT * FROM users WHERE name LIKE ?";
+    private static final String SELECT_ALL = "select * from users where id =?";
+    public static final String QUERY= "SELECT username, password FROM users";
+
+
+
+
+
      // Method to create the connection and set up database resources
     public static Connection createConnection() throws SQLException, ClassNotFoundException {
         Class.forName("com.mysql.cj.jdbc.Driver");
@@ -22,8 +34,8 @@ public class JdbcConnection {
 
     // Method to insert a new brand into the database
     public static boolean insertUser(Connection conn, String username, String password) throws SQLException {
-        String insertQuery = "INSERT INTO users (username, password) VALUES (?, ?)";
-        PreparedStatement insertStatement = conn.prepareStatement(insertQuery);
+
+        PreparedStatement insertStatement = conn.prepareStatement(INSERT_QUERY);
         insertStatement.setString(1, username);
         insertStatement.setString(2, password);
         int rowsInserted = insertStatement.executeUpdate();
@@ -32,8 +44,8 @@ public class JdbcConnection {
 
     // Method to update the name of a brand based on its ID
     public boolean updateUser(Connection conn, int userId, String newUsername, String newPassword) {
-        String updateQuery = "UPDATE users SET username = ?, password = ? WHERE id = ?";
-        try (PreparedStatement updateStatement = conn.prepareStatement(updateQuery)) {
+
+        try (PreparedStatement updateStatement = conn.prepareStatement(UPDATE_QUERY)) {
             updateStatement.setString(1, newUsername);
             updateStatement.setString(2, newPassword);
             updateStatement.setInt(3, userId);
@@ -46,8 +58,8 @@ public class JdbcConnection {
     }
 
     public boolean deleteUser(Connection conn, int userId) {
-        String deleteQuery = "DELETE FROM users WHERE id = ?";
-        try (PreparedStatement deleteStatement = conn.prepareStatement(deleteQuery)) {
+
+        try (PreparedStatement deleteStatement = conn.prepareStatement(DELETE_QUERY)) {
             deleteStatement.setInt(1, userId);
             int rowsDeleted = deleteStatement.executeUpdate();
             return rowsDeleted > 0;
@@ -59,8 +71,8 @@ public class JdbcConnection {
 
     // Method to search for a brand by its name
     private static void searchBrandByName(Connection conn, String searchKeyword) throws SQLException {
-        String searchQuery = "SELECT * FROM users WHERE name LIKE ?";
-        PreparedStatement searchStatement = conn.prepareStatement(searchQuery);
+
+        PreparedStatement searchStatement = conn.prepareStatement(SEARCH_QUERY);
         searchStatement.setString(1, "%" + searchKeyword + "%");
         ResultSet rs = searchStatement.executeQuery();
 

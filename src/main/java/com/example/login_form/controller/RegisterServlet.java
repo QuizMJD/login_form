@@ -51,7 +51,7 @@
 //
 package com.example.login_form.controller;
 
-import com.example.login_form.db.JdbcConnection;
+import com.example.login_form.db.UserDAO;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -95,7 +95,7 @@ public class RegisterServlet extends HttpServlet {
 
     private boolean registerUser(String username, String password) {
         try {
-            JdbcConnection jdbcConnection = new JdbcConnection();
+            UserDAO jdbcConnection = new UserDAO();
             Connection conn = jdbcConnection.createConnection(); // Tạo kết nối
             return jdbcConnection.insertUser(conn, username, password); // Truyền kết nối vào insertUser
         } catch (SQLException | ClassNotFoundException e) {
