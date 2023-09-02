@@ -1,5 +1,7 @@
 package com.example.login_form.db;
 
+import com.example.login_form.model.User;
+
 import java.sql.*;
 
 public class UserDAO {
@@ -94,6 +96,7 @@ public class UserDAO {
             preparedStatement.setString(2, password);
             ResultSet rs = preparedStatement.executeQuery();
             status = rs.next();
+            System.out.println(status);
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         } finally {
@@ -101,6 +104,15 @@ public class UserDAO {
         }
         return status;
 
+    }
+
+    public void deleteUser(String username) {
+    }
+
+    public void insert(User newUser) {
+    }
+
+    public void updatePassword(String username, String newPassword) {
     }
 }
 //

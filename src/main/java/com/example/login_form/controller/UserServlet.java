@@ -31,7 +31,7 @@ public class UserServlet extends HttpServlet {
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String action = request.getContextPath();
+        String action = request.getServletPath();
 
         try {
             switch (action) {
@@ -56,8 +56,8 @@ public class UserServlet extends HttpServlet {
                 case "/register":
                    register(request, response);
                     break;
-               
-                default:
+
+                case "/user":
                     listUser(request, response);
                     break;
             }
@@ -129,12 +129,12 @@ public class UserServlet extends HttpServlet {
         }
 
         request.setAttribute("users", users);
-        request.getRequestDispatcher("home.jsp").forward(request, response);
+        request.getRequestDispatcher("users.jsp").forward(request, response);
     }
 
     private void showNewForm(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        // TODO
+        //        // TODO
     }
 
     private void showEditForm(HttpServletRequest request, HttpServletResponse response)
@@ -144,17 +144,34 @@ public class UserServlet extends HttpServlet {
 
     private void insertUser(HttpServletRequest request, HttpServletResponse response)
             throws SQLException, IOException {
-        // TODO
+        String username = request.getParameter("username");
+        String password = request.getParameter("password");
+
+        User newUser = new User(username, password);
+        userDAO.insert(newUser);
+
+        response.sendRedirect("list"); // Redirect to the user list page
     }
+
 
     private void updateUser(HttpServletRequest request, HttpServletResponse response)
             throws SQLException, IOException {
-        // TODO
+        String username = request.getParameter("username");
+        String newPassword = request.getParameter("newPassword");
+
+        userDAO.updatePassword(username, newPassword);
+
+        response.sendRedirect("list"); // Redirect to the user list page
     }
+
 
     private void deleteUser(HttpServletRequest request, HttpServletResponse response)
             throws SQLException, IOException {
-        // TODO
+        String username = request.getParameter("username");
+
+        userDAO.deleteUser(username);
+
+        response.sendRedirect("list"); // Redirect to the user list page
     }
     private void login(HttpServletRequest request, HttpServletResponse response)
             throws SQLException, IOException, ServletException {
@@ -175,7 +192,7 @@ public class UserServlet extends HttpServlet {
         } else {
             // Đăng nhập thất bại, chuyển hướng đến trang đăng nhập với thông báo lỗi
             request.setAttribute("errorMessage", "Invalid username or password");
-            request.getRequestDispatcher("home.jsp").forward(request, response);
+            request.getRequestDispatcher("login.jsp").forward(request, response);
 
         }
     }
@@ -191,8 +208,42 @@ public class UserServlet extends HttpServlet {
     }
 
     private void register (HttpServletRequest request, HttpServletResponse response)
-            throws SQLException, IOException {
-        // TODO
+            throws SQLException, IOException, ServletException {
+        String username = request.getParameter("username");
+        String password = request.getParameter("password").trim();
+        String confirm_password = request.getParameter("confirm_password").trim();
+
+        // Kiểm tra xem có trường nào bị bỏ trống hay không
+        if (username.isEmpty() || password.isEmpty() || confirm_password.isEmpty()) {
+            request.setAttribute("errorMessage", "All fields are required");
+            request.getRequestDispatcher("register.jsp").forward(request, response);
+            return;
+        }
+
+        if (!password.equals(confirm_password)) {
+            request.setAttribute("errorMessage", "Passwords do not match");
+            request.getRequestDispatcher("register.jsp").forward(request, response);
+            return;
+        }
+
+        boolean isRegistrationSuccessful = registerUser(username, password);
+
+        if (isRegistrationSuccessful) {
+            response.sendRedirect("login.jsp");
+        } else {
+            request.setAttribute("errorMessage", "Registration failed");
+            request.getRequestDispatcher("register.jsp").forward(request, response);
+        }
     }
 
+    private boolean registerUser(String username, String password) {
+        try {
+            UserDAO jdbcConnection = new UserDAO();
+            Connection conn = jdbcConnection.createConnection(); // Tạo kết nối
+            return jdbcConnection.insertUser(conn, username, password); // Truyền kết nối vào insertUser
+        } catch (SQLException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
 }

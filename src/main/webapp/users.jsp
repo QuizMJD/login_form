@@ -13,7 +13,7 @@
 </head>
 <body>
 <h1>Account Information List</h1>
-<table class="account-info-list">
+<table class="users">
     <%
         List<User> currentUsers = (List<User>) request.getAttribute("users");
         if (currentUsers != null && !currentUsers.isEmpty()) {
@@ -36,3 +36,4 @@
 </table>
 </body>
 </html>
+

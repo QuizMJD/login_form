@@ -94,7 +94,7 @@
 <body>
 <div class="container">
     <%--<form action="login" method="post">--%>
-    <form class="login-form" action="login" method="post">>
+    <form class="login-form" action="${pageContext.request.contextPath}/login" method="post">
         <h2>Login</h2>
         <div class="form-group">
             <label for="username">Username</label>
@@ -105,7 +105,7 @@
             <input type="password" id="password" name="password" placeholder="Enter your password" >
         </div>
         <button type="submit">Login</button>
-        <p><a href="register.jsp">đăng ký</a></p>
+        <p><a href="${pageContext.request.contextPath}/register.jsp">đăng ký</a></p>
         <%-- Hiển thị thông báo lỗi nếu có --%>
         <c:if test="${not empty errorMessage}">
             <p>${errorMessage}</p>
