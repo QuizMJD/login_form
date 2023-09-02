@@ -12,7 +12,7 @@ public class UserDAO {
     private static final String SEARCH_QUERY = "SELECT * FROM users WHERE name LIKE ?";
     private static final String SELECT_ALL = "select * from users where id =?";
     public static final String QUERY= "SELECT username, password FROM users";
-//
+// JDBC
     private static final String DRIVER ="com.mysql.cj.jdbc.Driver";
     private static final String URL ="jdbc:mysql://localhost:3306/user_db";
     private static final String USERNAME ="root";
