@@ -30,7 +30,8 @@ public class UserServlet extends HttpServlet {
         doGet(request, response);
     }
 
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
         String action = request.getServletPath();
 
         try {
@@ -68,40 +69,6 @@ public class UserServlet extends HttpServlet {
 
 
 
-//        List<User> users = new ArrayList<>();
-//
-//        try {
-//            Connection conn = UserDAO.createConnection();
-//            Statement statement = conn.createStatement();
-//            String query = "SELECT username, password FROM users";
-//            ResultSet resultSet = statement.executeQuery(query);
-//
-//            while (resultSet.next()) {
-//                String username = resultSet.getString("username");
-//                String password = resultSet.getString("password");
-//                User user = new User(username, password);
-//                users.add(user);
-//            }
-//
-//            conn.close();
-//        } catch (SQLException | ClassNotFoundException e) {
-//            e.printStackTrace();
-//            // Handle exceptions
-//        }
-//
-//        request.setAttribute("users", users);
-//        request.getRequestDispatcher("home.jsp").forward(request, response);
-//    }
-
-
-//    private void  users_list (HttpServletRequest request, HttpServletResponse response)
-//            throws SQLException, IOException, ServletException {
-//
-//        request.setAttribute("users", users);
-//        request.getRequestDispatcher("users.jsp").forward(request, response);
-//
-//
-//        // TODO
     }
 
     private void listUser (HttpServletRequest request, HttpServletResponse response)
@@ -112,7 +79,6 @@ public class UserServlet extends HttpServlet {
         try {
             Connection conn = UserDAO.createConnection();
             Statement statement = conn.createStatement();
-//            String query = "SELECT username, password FROM users";
             ResultSet resultSet = statement.executeQuery(QUERY);
 
             while (resultSet.next()) {
@@ -121,7 +87,6 @@ public class UserServlet extends HttpServlet {
                 User user = new User(username, password);
                 users.add(user);
             }
-
             conn.close();
         } catch (SQLException | ClassNotFoundException e) {
             e.printStackTrace();
@@ -129,7 +94,7 @@ public class UserServlet extends HttpServlet {
         }
 
         request.setAttribute("users", users);
-        request.getRequestDispatcher("users.jsp").forward(request, response);
+        request.getRequestDispatcher("/users.jsp").forward(request, response);
     }
 
     private void showNewForm(HttpServletRequest request, HttpServletResponse response)
@@ -196,7 +161,6 @@ public class UserServlet extends HttpServlet {
 
         }
     }
-
 
     private boolean validateUser (String username, String password) throws SQLException {
         // Thực hiện truy vấn đến cơ sở dữ liệu để kiểm tra thông tin đăng nhập
